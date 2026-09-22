@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Zyqen Technologies"
+description = "A premium single-page company website for Zyqen Technologies, presenting digital, AI, website, software, app development, and training services with a live Google Apps Script enquiry form."
+version = "1.0.0"
+id = "artifacts/zyqen-technologies"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19870
+
+[services.development]
+run = "pnpm --filter @workspace/zyqen-technologies run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/zyqen-technologies", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/zyqen-technologies/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19870"
+BASE_PATH = "/"
